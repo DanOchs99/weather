@@ -11,9 +11,10 @@ function Reading(props) {
 
     return (
         <div>
-            <div>{props.reading.temp}</div>
-            <div>{props.reading.humidity}</div>
-            <div>{props.reading.time}</div>
+            {props.success ? <div> {props.reading.temp} </div> : null}
+            {props.success ? <div> {props.reading.humidity} </div> : null}
+            {props.success ? <div> {props.reading.time} </div> : null}
+            <div> {props.message} </div>
             <button onClick={handleClickUpdate}>Update</button>
         </div>
     )
@@ -21,7 +22,9 @@ function Reading(props) {
 
 const mapStateToProps = (state) => {
     return { token: state.token, 
-             reading: state.reading }
+             reading: state.reading,
+             success: state.success,
+             message: state.readingMessage }
 }
 
 const mapDispatchToProps = (dispatch) => {

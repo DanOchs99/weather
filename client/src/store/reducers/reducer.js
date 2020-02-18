@@ -1,6 +1,6 @@
 import * as actionTypes from '../types/types'
 
-const initialState = { isAuthenticated: false, username: null, message: '', reading: {} }
+const initialState = { isAuthenticated: false, username: null, message: '', reading: {}, success: true, readingMessage: '' }
 
 const reducer = (state = initialState, action) => {
     switch(action.type) {
@@ -24,7 +24,9 @@ const reducer = (state = initialState, action) => {
                 message: '' }
         case actionTypes.ON_UPDATE:
             return {...state,
-                reading: action.payload }
+                reading: action.payload.reading,
+                success: action.payload.success,
+                readingMessage: action.payload.message  }
         default:
             return state;
     }
