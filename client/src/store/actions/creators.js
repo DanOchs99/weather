@@ -18,7 +18,8 @@ const onUpdateActionCreator = (reading) => {
 
 export const onLogin = (user) => {
     return (dispatch) => {
-        fetch("http://localhost:8080/login", {
+        //fetch("http://localhost:8080/login", {
+        fetch("https://weather-station-collector.azurewebsites.net/login", {
             method: 'POST',  
             body: JSON.stringify({user: user }),
             headers: {
@@ -43,7 +44,8 @@ export const onLogin = (user) => {
 
 export const onAuth = (token) => {
     return (dispatch) => {
-        fetch("http://localhost:8080/verify", {
+        //fetch("http://localhost:8080/verify", {
+        fetch("https://weather-station-collector.azurewebsites.net/verify", {
             method: 'POST',  
             body: JSON.stringify({token: token }),
             headers: {
@@ -63,12 +65,14 @@ export const onAuth = (token) => {
                 dispatch(onLoginFailActionCreator(`Server returned code ${response.status}`))
             }
         })
+        .catch(error => console.log(error))
     }
 }
 
 export const onRegister = (user) => {
     return (dispatch) => {
-        fetch("http://localhost:8080/register", {
+        //fetch("http://localhost:8080/register", {
+        fetch("https://weather-station-collector.azurewebsites.net/register", {
             method: 'POST',  
             body: JSON.stringify(user),
             headers: {
@@ -100,7 +104,8 @@ export const onLogoff = () => {
 
 export const onUpdate = (token) => {
     return (dispatch) => {
-        fetch("http://localhost:8080", {
+        //fetch("http://localhost:8080", {
+        fetch("https://weather-station-collector.azurewebsites.net", {
             headers: {
                 "Content-Type": "application/json",
                 "authorization": `Bearer ${token}`
@@ -110,7 +115,6 @@ export const onUpdate = (token) => {
             if (response.status === 200) {
                 response.json()
                 .then((json) => {
-                    console.log(json)
                     dispatch(onUpdateActionCreator(json))
                 })
             }

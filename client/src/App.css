@@ -16,3 +16,17 @@
 .App-link {
   color: #61dafb;
 }
+
+button {
+  background-color: steelblue;
+  color: white;
+  border-radius: 5px;
+  font-size: calc(7px + 2vmin);
+  margin: 7px;
+}
+
+input {
+  color: steelblue;
+  font-size: calc(10px + 2vmin);
+  margin: 7px;
+}

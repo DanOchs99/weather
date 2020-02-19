@@ -49,12 +49,11 @@ app.get("/", auth, (req,res) => {
     // TODO: not hardcode the device - for now just get deviceId '001'
     const deviceId = '001'
 
-    // TODO: add an ORDER BY clause and LIMIT 1 reading!!
-    db.oneOrNone("SELECT temp, humidity, time FROM readings WHERE device_id=$1;", [deviceId])
+    db.oneOrNone("SELECT temp, humidity, time FROM readings WHERE device_id=$1 ORDER BY time DESC LIMIT 1;", [deviceId])
     .then(results => {
         if (results) {
-            const fake_timestamp = new Date().toLocaleTimeString()
-            const reading = {temp: '69.9', humidity: '60', time: fake_timestamp}
+            //const fake_timestamp = new Date().toLocaleTimeString()
+            const reading = {temp: results.temp, humidity: results.humidity, time: results.time}
             res.status(200).json({success: true, message: '', reading: reading})
         }
         else {
