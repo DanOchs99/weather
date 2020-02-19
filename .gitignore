@@ -30,6 +30,7 @@ server/.env
 
 collector/.DS_Store
 collector/.env
+.collector.env
 
 client/npm-debug.log*
 client/yarn-debug.log*

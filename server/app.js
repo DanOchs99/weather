@@ -1,23 +1,23 @@
 const express = require('express')
-const cors = require("cors");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const cors = require('cors')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
 
-require("dotenv").config();
+require('dotenv').config()
 
 const PORT = process.env.PORT
 const DATABASE_URL = process.env.DATABASE_URL
-const JWT_SECRET = process.env.JWT_SECRET;
-const SALT_ROUNDS = 10;
+const JWT_SECRET = process.env.JWT_SECRET
+const SALT_ROUNDS = 10
 
 const app = express()
 
-const pgp = require("pg-promise")()
+const pgp = require('pg-promise')()
 pgp.pg.defaults.ssl = true
 const db = pgp(DATABASE_URL)
 
-app.use(cors());
-app.use(express.json());
+app.use(cors())
+app.use(express.json())
 
 // authorization middleware
 const auth = (req,res,next) => {

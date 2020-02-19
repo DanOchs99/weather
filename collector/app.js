@@ -1,18 +1,28 @@
-require("dotenv").config();
+const express = require('express')
 const ttn = require('ttn')
 
-const PORT = process.env.PORT
+require('dotenv').config()
 
-const appID = process.env.APPID
-const accessKey = process.env.ACCESSKEY
+const PORT = process.env.PORT
+const TTN_APPID = process.env.TTN_APPID
+const TTN_ACCESSKEY = process.env.TTN_ACCESSKEY
 const DATABASE_URL = process.env.DATABASE_URL
 
-ttn.data(appID, accessKey)
+const app = express()
+
+const pgp = require('pg-promise')()
+pgp.pg.defaults.ssl = true
+const db = pgp(DATABASE_URL)
+
+ttn.data(TTN_APPID, TTN_ACCESSKEY)
   .then((client) => { 
       client.on("uplink", (devID, payload) => {
-          // TODO - send reading to database here!!
-          console.log("Received uplink from ",devID)
-          console.log(payload)
+          db.none("INSERT INTO readings(temp, humidity, time, device_id) VALUES($1,$2,$3,$4);", [payload.payload_fields.temp, payload.payload_fields.humidity, payload.metadata.time, devID])
+          //.then(() => {
+          //    console.log("Saved reading to database")
+          //    console.log(payload)
+          //})
+          .catch(error => console.log(error))
       })
       console.log("Listening for updates...")
   })
@@ -20,3 +30,7 @@ ttn.data(appID, accessKey)
       console.error("Unable to connect to TTN server.")
       console.error(err)
   })
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`)
+})
