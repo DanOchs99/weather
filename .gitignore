@@ -31,6 +31,8 @@ collector/.deployment
 collector/.vscode
 .collector.env
 
+sensor/keys.h
+
 client/npm-debug.log*
 client/yarn-debug.log*
 client/yarn-error.log*
