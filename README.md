@@ -22,25 +22,15 @@
 - PostgreSQL
 
 ## Hardware:
-- Edge device:
-- TinyZero microcontroller, Temperature/Humidity, Proto (TinyCircuits)
-- RAK 811 Breakout (RAK Wireless)
+- Edge device: TinyZero microcontroller, Temperature/Humidity, Proto (TinyCircuits); RAK 811 Breakout (RAK Wireless)
 
-- Gateway:
-- Raspberry Pi 4 (Pi store??)
-- RAK 2245 Pi Hat (RAK Wireless)
-- case, antenna
+- Gateway: Raspberry Pi 4 (Pi store??); RAK2245 RPi HAT Edition LoRaWAN Gateway Concentrator Module (RAK Wireless); case; antenna
 
 ## Project dependencies:
-- Edge device:
-- libraries...
+- Edge device: SI7021 library ()
 
-- Gateway:
-- RAK software...
+- Gateway: RAK software... (RAK Wireless)
 
-- Server:
-- Node.js, Express.js, ttn
-- bcrypt, dotenv, pg-promise, socket.io
+- Server: Node.js, Express.js, ttn, bcrypt, dotenv, cors, jsonwebtoken, pg-promise, socket.io
 
-- Client:
-- React, Redux
+- Client: React.js, Redux
