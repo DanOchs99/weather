@@ -5,8 +5,8 @@ client/node_modules
 client/.pnp
 client/.pnp.js
 
-server/node_modules
 collector/node_modules
+collector/node_modules/.bin
 
 # testing
 client/coverage
@@ -25,13 +25,16 @@ client/npm-debug.log*
 client/yarn-debug.log*
 client/yarn-error.log*
 
-server/.DS_Store
-server/.env
-
 collector/.DS_Store
 collector/.env
+collector/.deployment
+collector/.vscode
 .collector.env
 
 client/npm-debug.log*
 client/yarn-debug.log*
 client/yarn-error.log*
+
+collector/npm-debug.log*
+collector/yarn-debug.log*
+collector/yarn-error.log*

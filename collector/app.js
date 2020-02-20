@@ -205,6 +205,11 @@ app.post("/verify", (req,res) => {
     })
 })
 
+// route for monitor to keep Azure from spinning down site
+app.get("/keepalive", (req,res) => {
+    res.status(200).end()
+})
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 })
