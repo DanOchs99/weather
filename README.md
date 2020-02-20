@@ -10,7 +10,7 @@
    A user may register and login with a username and password or use the guest account as described above.  The current temperature and humidity readings will be displayed along with the time of the report, press the Update button to get the latest reading from the database. 
 
 ## Site Preview
-<img src="weather_station.png" height="400px" width="600px">
+<img src="weather_station.png" height="400px" width="372px">
 
 ## Live link:
 - [Weather Station](https://weather-station-app.azurewebsites.net)
