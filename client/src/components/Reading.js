@@ -16,12 +16,18 @@ function Reading(props) {
     }
 
     return (
-        <div className="displayReadings">
+        <div>
+          <div className="displayReadings">
             {props.success ? <div> {props.reading.temp}&deg;F </div> : null}
             {props.success ? <div> {props.reading.humidity}% RH </div> : null}
-            {props.success ? <div> {props.reading.time} </div> : null}
-            <div> {props.message} </div>
+          </div>
+          <div className="displayReadings">
+            {props.success ? <div className="info"> {props.reading.devname} </div> : null}  
+            {props.success ? <div className="info2"> Device ID: {props.reading.devid} </div> : null}
+            {props.success ? <div className="info"> {props.reading.time} </div> : null}
+            <div className="info"> {props.message} </div>
             <button onClick={handleClickUpdate}>Update</button>
+          </div>
         </div>
     )
 }

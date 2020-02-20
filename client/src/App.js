@@ -26,7 +26,7 @@ function App(props) {
   return (
     <div className="App">
       <header className="App-header">
-        <h2>Weather Station</h2>
+        <h1>Weather Station</h1>
         {!props.isAuthenticated && <div id="loginDiv">
                                      <button id="loginButton" onClick={handleClickLogin}>Login</button>
                                      <button id="registerButton" onClick={handleClickRegister}>Register</button>

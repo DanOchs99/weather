@@ -18,6 +18,11 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+const http = require('http').createServer(app)
+const io = require('socket.io')(http,{
+    perMessageDeflate: false
+})
+
 const pgp = require('pg-promise')()
 pgp.pg.defaults.ssl = true
 const db = pgp(DATABASE_URL)
@@ -25,11 +30,12 @@ const db = pgp(DATABASE_URL)
 ttn.data(TTN_APPID, TTN_ACCESSKEY)
 .then((client) => { 
     client.on("uplink", (devID, payload) => {
+        // put new reading in the database
         db.none("INSERT INTO readings(temp, humidity, time, device_id) VALUES($1,$2,$3,$4);", [payload.payload_fields.temp, payload.payload_fields.humidity, payload.metadata.time, devID])
-        //.then(() => {
-        //    console.log("Saved reading to database")
-        //    console.log(payload)
-        //})
+        .then(() => {
+        // let any connected clients know there is a new reading available
+            io.emit('newReading')
+        })
         .catch(error => console.log(error))
     })
     console.log("Listening for updates...")
@@ -69,15 +75,27 @@ app.get("/", auth, (req,res) => {
     // TODO: not hardcode the device - for now just get deviceId '001'
     const deviceId = '001'
 
-    db.oneOrNone("SELECT temp, humidity, time FROM readings WHERE device_id=$1 ORDER BY time DESC LIMIT 1;", [deviceId])
-    .then(results => {
-        if (results) {
-            //const fake_timestamp = new Date().toLocaleTimeString()
-            const reading = {temp: results.temp.toFixed(1), humidity: results.humidity.toFixed(0), time: results.time.toLocaleTimeString(['en-US'], {timeZone: 'America/Chicago'})}
-            res.status(200).json({success: true, message: '', reading: reading})
+    db.oneOrNone("SELECT id, nickname FROM devices WHERE id=$1;", [deviceId])
+    .then(resultsDevice => {
+        if(resultsDevice) {
+            db.oneOrNone("SELECT temp, humidity, time FROM readings WHERE device_id=$1 ORDER BY time DESC LIMIT 1;", [deviceId])
+            .then(results => {
+                if (results) {
+                    //const fake_timestamp = new Date().toLocaleTimeString()
+                    const reading = {temp: results.temp.toFixed(1), humidity: results.humidity.toFixed(0), time: results.time.toLocaleTimeString(['en-US'], {timeZone: 'America/Chicago'}), devid: deviceId, devname: resultsDevice.nickname}
+                    res.status(200).json({success: true, message: '', reading: reading})
+                }
+                else {
+                    res.status(200).json({success: false, message: 'No readings available'})
+                }
+            })
+            .catch(error => {
+                console.log(error)
+                res.status(500).json({success: false, message: 'Internal server error'})
+            })
         }
         else {
-            res.status(200).json({success: false, message: 'No readings available'})
+            res.status(200).json({success: false, message: 'Device not found'})
         }
     })
     .catch(error => {
@@ -210,6 +228,10 @@ app.get("/keepalive", (req,res) => {
     res.status(200).end()
 })
 
-app.listen(PORT, () => {
+io.on('connection', (socket) => {
+    console.log("A client has connected...")
+})
+
+http.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 })

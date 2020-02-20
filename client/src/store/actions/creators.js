@@ -16,6 +16,10 @@ const onUpdateActionCreator = (reading) => {
     return({type: actionTypes.ON_UPDATE, payload: reading})
 }
 
+const onConnectActionCreator = (socket) => {
+    return({type: actionTypes.ON_CONNECT, payload: socket})
+}
+
 export const onLogin = (user) => {
     return (dispatch) => {
         //fetch("http://localhost:8080/login", {
@@ -122,5 +126,11 @@ export const onUpdate = (token) => {
                 dispatch(onLoginFailActionCreator(`Server returned code ${response.status}`))
             }
         })
+    }
+}
+
+export const onConnect = (socket) => {
+    return (dispatch) => {
+        dispatch(onConnectActionCreator(socket))
     }
 }

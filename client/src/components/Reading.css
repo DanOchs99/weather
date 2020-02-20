@@ -1,3 +1,12 @@
 .displayReadings {
+    margin-top: 20px;
+}
+
+.info {
     margin-top: 10px;
+    font-size: calc(10px + 2vmin);
+}
+
+.info2 {
+    font-size: calc(10px + 1.25vmin);    
 }
