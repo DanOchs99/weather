@@ -1,9 +1,0 @@
-{
-    "git.ignoreLimitWarning": true,
-    "appService.zipIgnorePattern": [
-        "node_modules{,/**}",
-        ".vscode{,/**}"
-    ],
-    "appService.defaultWebAppToDeploy": "/subscriptions/9fd06ec3-3269-4291-a922-51f896daa02d/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/weather-station-collector",
-    "appService.deploySubpath": ""
-}
