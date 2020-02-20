@@ -22,14 +22,14 @@
 - PostgreSQL
 
 ## Hardware:
-- Edge device: TinyZero microcontroller, Temperature/Humidity, Proto (TinyCircuits); RAK 811 Breakout (RAK Wireless)
+- Edge device: TinyZero microcontroller, Temperature/Humidity TinyShield, Proto Terminal Blocks TinyShield (TinyCircuits); RAK811 LoRa Breakout Module (RAK Wireless)
 
-- Gateway: Raspberry Pi 4 (Pi store??); RAK2245 RPi HAT Edition LoRaWAN Gateway Concentrator Module (RAK Wireless); case; antenna
+- Gateway: Raspberry Pi 4 Model B; RAK2245 RPi HAT Edition LoRaWAN Gateway Concentrator Module (RAK Wireless); Raspberry Pi Universal HAT Size Case DIY Kit - Protective Acrylic Case for Raspberry Pi 4 Model B (Geekworm); 900MHz Antenna Kit 3.5Dbi External Omni Rubber Duck Indoor Antenna with RP-SMA Connector + IPX U.fl to RP-SMA Cable Pigtail (wlaniot)
 
 ## Project dependencies:
-- Edge device: SI7021 library ()
+- Edge device: Si7021 Arduino Library (https://github.com/TinyCircuits/TinyCircuits-TinyShield-Sensor-ASD2511/raw/master/libraries/SI7021.zip)
 
-- Gateway: RAK software... (RAK Wireless)
+- Gateway: Raspian Buster Lite, RAK Wireless Firmware (https://github.com/RAKWireless/rak_common_for_gateway.git)
 
 - Server: Node.js, Express.js, ttn, bcrypt, dotenv, cors, jsonwebtoken, pg-promise, socket.io
 
