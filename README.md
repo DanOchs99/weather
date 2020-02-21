@@ -10,7 +10,7 @@
    A user may register and login with a username and password or use the guest account as described above.  The current temperature and humidity readings will be displayed along with the time of the report, when a new reading is received from the sensor the display will update.
 
 ## Site Preview
-<img src="weather_station.png" height="400px" width="372px">
+<img src="weather-station.png" height="400px" width="372px">
 
 ## Live link:
 - [Weather Station](https://weather-station-app.azurewebsites.net)
