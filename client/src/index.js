@@ -19,7 +19,10 @@ if (token) {
     store.dispatch(actionCreators.onAuth(token))
 }
 
+// for production
 const socket = openSocket('https://weather-station-collector.azurewebsites.net')
+// for local dev
+// const socket = openSocket('http://localhost:8080')
 if (socket) {
     store.dispatch(actionCreators.onConnect(socket))
 }

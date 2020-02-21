@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt')
 
 require('dotenv').config()
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT | 8080
 const TTN_APPID = process.env.TTN_APPID
 const TTN_ACCESSKEY = process.env.TTN_ACCESSKEY
 const DATABASE_URL = process.env.DATABASE_URL

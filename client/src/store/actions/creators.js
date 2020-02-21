@@ -1,5 +1,11 @@
 import * as actionTypes from '../types/types'
 
+// for local dev
+//const weather_station_server = "http://localhost:8080"
+// for production
+const weather_station_server = "https://weather-station-collector.azurewebsites.net"
+
+
 const onLoginSuccessActionCreator = (user) => {
     return ({type: actionTypes.ON_LOGIN_SUCCESS, payload: user})
 }
@@ -22,8 +28,7 @@ const onConnectActionCreator = (socket) => {
 
 export const onLogin = (user) => {
     return (dispatch) => {
-        //fetch("http://localhost:8080/login", {
-        fetch("https://weather-station-collector.azurewebsites.net/login", {
+        fetch(weather_station_server.concat("/login"), {
             method: 'POST',  
             body: JSON.stringify({user: user }),
             headers: {
@@ -48,8 +53,7 @@ export const onLogin = (user) => {
 
 export const onAuth = (token) => {
     return (dispatch) => {
-        //fetch("http://localhost:8080/verify", {
-        fetch("https://weather-station-collector.azurewebsites.net/verify", {
+        fetch(weather_station_server.concat("/verify"), {
             method: 'POST',  
             body: JSON.stringify({token: token }),
             headers: {
@@ -75,8 +79,7 @@ export const onAuth = (token) => {
 
 export const onRegister = (user) => {
     return (dispatch) => {
-        //fetch("http://localhost:8080/register", {
-        fetch("https://weather-station-collector.azurewebsites.net/register", {
+        fetch(weather_station_server.concat("/register"), {
             method: 'POST',  
             body: JSON.stringify(user),
             headers: {
@@ -108,8 +111,7 @@ export const onLogoff = () => {
 
 export const onUpdate = (token) => {
     return (dispatch) => {
-        //fetch("http://localhost:8080", {
-        fetch("https://weather-station-collector.azurewebsites.net", {
+        fetch(weather_station_server, {
             headers: {
                 "Content-Type": "application/json",
                 "authorization": `Bearer ${token}`

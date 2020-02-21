@@ -11,9 +11,13 @@ function Reading(props) {
         initReading(initToken)
     }, [initReading, initToken])
 
-    const handleClickUpdate = () => {
+    //const handleClickUpdate = () => {
+    //    props.onUpdate(props.token)
+    //}
+
+    props.socket.on('newReading', () => {
         props.onUpdate(props.token)
-    }
+    })
 
     return (
         <div>
@@ -26,17 +30,24 @@ function Reading(props) {
             {props.success ? <div className="info2"> Device ID: {props.reading.devid} </div> : null}
             {props.success ? <div className="info"> {props.reading.time} </div> : null}
             <div className="info"> {props.message} </div>
-            <button onClick={handleClickUpdate}>Update</button>
           </div>
         </div>
     )
 }
 
+// JSX removed - last line of second .displayReadings div
+/*
+
+<button onClick={handleClickUpdate}>Update</button>
+
+*/
+
 const mapStateToProps = (state) => {
     return { token: state.token, 
              reading: state.reading,
              success: state.success,
-             message: state.readingMessage }
+             message: state.readingMessage,
+             socket: state.socket }
 }
 
 const mapDispatchToProps = (dispatch) => {
