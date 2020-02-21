@@ -7,7 +7,7 @@
    Go to https://weather-station-app.azurewebsites.net  Register a username & password or use 'guest' and 'demo' to access the site.
 
 * **Features of the application:**
-   A user may register and login with a username and password or use the guest account as described above.  The current temperature and humidity readings will be displayed along with the time of the report, press the Update button to get the latest reading from the database. 
+   A user may register and login with a username and password or use the guest account as described above.  The current temperature and humidity readings will be displayed along with the time of the report, when a new reading is received from the sensor the display will update.
 
 ## Site Preview
 <img src="weather_station.png" height="400px" width="372px">
