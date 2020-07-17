@@ -82,7 +82,11 @@ app.get("/", auth, (req,res) => {
             .then(results => {
                 if (results) {
                     //const fake_timestamp = new Date().toLocaleTimeString()
-                    const reading = {temp: results.temp.toFixed(1), humidity: results.humidity.toFixed(0), time: results.time.toLocaleTimeString(['en-US'], {timeZone: 'America/Chicago'}), devid: deviceId, devname: resultsDevice.nickname}
+                    const reading = {temp: results.temp.toFixed(1),
+                                     humidity: results.humidity.toFixed(0),
+                                     time: results.time.toLocaleTimeString(['en-US'], {timeZone: 'America/Chicago'}),
+                                     date: results.time.toLocaleTimeString(['en-US'], {timeZone: 'America/Chicago'}),
+                                     devid: deviceId, devname: resultsDevice.nickname}
                     res.status(200).json({success: true, message: '', reading: reading})
                 }
                 else {

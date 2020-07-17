@@ -29,6 +29,7 @@ function Reading(props) {
             {props.success ? <div className="info"> {props.reading.devname} </div> : null}  
             {props.success ? <div className="info2"> Device ID: {props.reading.devid} </div> : null}
             {props.success ? <div className="info"> {props.reading.time} </div> : null}
+            {props.success ? <div className="info2"> {props.reading.date} </div> : null}
             <div className="info"> {props.message} </div>
           </div>
         </div>
