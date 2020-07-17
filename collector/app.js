@@ -85,7 +85,7 @@ app.get("/", auth, (req,res) => {
                     const reading = {temp: results.temp.toFixed(1),
                                      humidity: results.humidity.toFixed(0),
                                      time: results.time.toLocaleTimeString(['en-US'], {timeZone: 'America/Chicago'}),
-                                     date: results.time.toLocaleTimeString(['en-US'], {timeZone: 'America/Chicago'}),
+                                     date: results.time.toLocaleDateString(['en-US'], {timeZone: 'America/Chicago', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}),
                                      devid: deviceId, devname: resultsDevice.nickname}
                     res.status(200).json({success: true, message: '', reading: reading})
                 }
